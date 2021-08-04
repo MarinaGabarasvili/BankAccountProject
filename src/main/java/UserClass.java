@@ -73,9 +73,9 @@ public class UserClass {
             }
         Integer userId = 0;
 
-            String fetchProductInfoQuery = "Select id from bank.users order by id desc limit 1; ";
+            String fetchUserIdQuery = "Select id from bank.users order by id desc limit 1; ";
             try(Statement statement = connection.createStatement()){
-                ResultSet rs = statement.executeQuery(fetchProductInfoQuery);
+                ResultSet rs = statement.executeQuery(fetchUserIdQuery);
                 if(rs.next()) {
                     userId = rs.getInt("id");
                 }
