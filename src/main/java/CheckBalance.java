@@ -49,4 +49,16 @@ public class CheckBalance {
         }
         return accountBalance;
     }
+    public static void getInfo(Connection connection, int id) {
+        Statement statement = null;
+        String showUserInfo = "select accounts.balance, accounts.account_number, users.name, users.id from users inner join accounts on accounts.user_id = users.id where users.id =" + id;
+        try {
+            statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(showUserInfo);
+            while (rs.next())
+                System.out.println(rs.getInt(1) + "  " + rs.getString(2) + "  " + rs.getString(3) + " " + rs.getInt(4));
+        } catch (SQLException err) {
+            err.printStackTrace();
+        }
+    }
 }
