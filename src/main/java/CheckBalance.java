@@ -6,8 +6,8 @@ public class CheckBalance {
         try {
             Connection con = DriverManager.getConnection(
                     "jdbc:mysql://127.0.0.1:3306/bank", "root", "danaja05");
-            System.out.println(checkBalance(con, 2));
-            madeTransaction(con, 2,3, 500);
+            System.out.println(checkBalance(con, 13));
+            madeTransaction(con, 13,14, 50);
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -26,6 +26,8 @@ public class CheckBalance {
                 cstmt.setInt(2, secondUserId);
                 cstmt.setInt(3, money);
                 cstmt.execute();
+                System.out.println("Transaction made!");
+                System.out.println("Your balance is " + checkBalance(connection, 13) + " euros");
             } catch (SQLException err) {
                 err.printStackTrace();
             }
