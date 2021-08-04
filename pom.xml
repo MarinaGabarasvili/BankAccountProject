@@ -19,4 +19,9 @@
             <version>8.0.19</version>
         </dependency>
     </dependencies>
+    <build>
+        <defaultGoal>clean</defaultGoal>
+        <!-- Source directory configuration -->
+        <sourceDirectory>src</sourceDirectory>
+    </build>
 </project>
