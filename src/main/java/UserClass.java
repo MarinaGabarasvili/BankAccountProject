@@ -9,7 +9,7 @@ public class UserClass {
         try
         {
             Connection con = DriverManager.getConnection(
-                    "jdbc:mysql://127.0.0.1:3306/Bank", "root", "Oxford1984");
+                    "jdbc:mysql://127.0.0.1:3306/bank", "root", "danaja05");
             addUser(con);
 
         }
@@ -32,10 +32,22 @@ public class UserClass {
                 while (!correct) {
                     System.out.println("Enter your username:");
                     userName = scan.nextLine();
+
+                    String fetchUserQuery = "Select id from bank.users where name = '" + userName + "';";
+                    try(Statement statement = connection.createStatement()){
+                        ResultSet rs = statement.executeQuery(fetchUserQuery);
+                        if(rs.next()) {
+                            System.out.println("Please try another username, this username is already used");
+                            return;
+                        }
+                    }catch (SQLException err){
+                        err.printStackTrace();
+                    }
                     if (userName.isEmpty() || userName.length() > 25) {
                         System.out.println("Username is not valid, must be more than 0 and up to 25 characters");
                         continue;
-                    } else {
+                    }
+                    else {
                         while (!correct) {
                             System.out.println("Enter password:");
                             password = scan.nextLine();
