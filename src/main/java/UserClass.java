@@ -9,7 +9,7 @@ public class UserClass {
         try
         {
             Connection con = DriverManager.getConnection(
-                    "jdbc:mysql://127.0.0.1:3306/Bank", "root", "Oxford1984");
+                    "jdbc:mysql://127.0.0.1:3306/bank", "root", "danaja05");
             addUser(con);
 
         }
