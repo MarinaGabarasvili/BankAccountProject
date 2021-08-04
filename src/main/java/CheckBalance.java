@@ -7,12 +7,10 @@ public class CheckBalance {
             Connection con = DriverManager.getConnection(
                     "jdbc:mysql://127.0.0.1:3306/bank", "root", "danaja05");
             System.out.println(checkBalance(con, 2));
-            madeTransaction(con, 2,3, 20);
+            madeTransaction(con, 2,3, 500);
         } catch (Exception e) {
             System.out.println(e);
         }
-
-
     }
 
     public static void madeTransaction(Connection connection, int firstUserId, int secondUserId, int money){
@@ -20,12 +18,15 @@ public class CheckBalance {
         if(money >  checkBalance(connection, firstUserId)){
             System.out.println("There is not enough money on your bank account!");
         } else {
-            try(Statement statement = connection.createStatement()){
-                connection.setAutoCommit(false);
-                statement.execute("UPDATE accounts inner join users on users.id = accounts.user_id SET accounts.balance = accounts.balance - " + money + " where users.id =" + firstUserId + ";");
-                statement.execute("UPDATE accounts inner join users on users.id = accounts.user_id SET accounts.balance = accounts.balance + " + money + " where users.id =" + secondUserId + ";");
-                connection.commit();
-            }catch (SQLException err){
+            CallableStatement cstmt = null;
+            try {
+                String SQL = "{call transaction(?,?,?)}";
+                cstmt = connection.prepareCall(SQL);
+                cstmt.setInt(1, firstUserId);
+                cstmt.setInt(2, secondUserId);
+                cstmt.setInt(3, money);
+                cstmt.execute();
+            } catch (SQLException err) {
                 err.printStackTrace();
             }
         }
