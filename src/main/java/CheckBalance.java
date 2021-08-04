@@ -6,8 +6,11 @@ public class CheckBalance {
         try {
             Connection con = DriverManager.getConnection(
                     "jdbc:mysql://127.0.0.1:3306/bank", "root", "danaja05");
-            System.out.println(checkBalance(con, 13));
+            getInfo(con, 13);
+            getInfo(con, 14);
             madeTransaction(con, 13,14, 50);
+            getInfo(con, 13);
+            getInfo(con, 14);
         } catch (Exception e) {
             System.out.println(e);
         }
