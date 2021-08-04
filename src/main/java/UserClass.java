@@ -1,3 +1,5 @@
+package main.java;
+
 import java.sql.*;
 import java.util.Scanner;
 
@@ -7,7 +9,7 @@ public class UserClass {
         try
         {
             Connection con = DriverManager.getConnection(
-                    "jdbc:mysql://127.0.0.1:3306/bank", "root", "danaja05");
+                    "jdbc:mysql://127.0.0.1:3306/Bank", "root", "Oxford1984");
             addUser(con);
 
         }
@@ -22,13 +24,31 @@ public class UserClass {
 
 
     public static void addUser(Connection connection){
-        Scanner scan = new Scanner(System.in);
 
-        System.out.println("Enter your username:");
-        String userName = scan.nextLine();
-
-        System.out.println("Enter password:");
-        String password = scan.nextLine();
+                Scanner scan = new Scanner(System.in);
+                boolean correct = false;
+                String userName = "";
+                String password = "";
+                while (!correct) {
+                    System.out.println("Enter your username:");
+                    userName = scan.nextLine();
+                    if (userName.isEmpty() || userName.length() > 25) {
+                        System.out.println("Username is not valid, must be more than 0 and up to 25 characters");
+                        continue;
+                    } else {
+                        while (!correct) {
+                            System.out.println("Enter password:");
+                            password = scan.nextLine();
+                            if (password.isEmpty() || password.length() > 10) {
+                                System.out.println("Password is not valid, must be more than 0 and up to 10 characters");
+                                continue;
+                            } else {
+                                System.out.println("New account is created");
+                                correct = true;
+                            }
+                        }
+                    }
+                }
 
         String insertUser = "INSERT into bank.users (name, password) VALUES(?,?)";
             try(PreparedStatement insertQuery = connection.prepareStatement((insertUser))){
