@@ -5,20 +5,20 @@ public class CheckBalance {
     public static void main(String[] args) {
         try {
             Connection con = DriverManager.getConnection(
-                    "jdbc:mysql://127.0.0.1:3306/bank", "root", "danaja05");
-            getInfo(con, 14);
-            getInfo(con, 15);
-            madeTransaction(con, getAccountNumber(con,14), getAccountNumber(con,15), 50);
-            getInfo(con, 14);
-            getInfo(con, 15);
+                    "jdbc:mysql://127.0.0.1:3306/bank", "root", "Oxford1984");
+            getInfo(con, 10);
+            getInfo(con, 11);
+            madeTransaction(con, getAccountNumber(con, 10), getAccountNumber(con, 11), 50);
+            getInfo(con, 10);
+            getInfo(con, 11);
         } catch (Exception e) {
             System.out.println(e);
         }
     }
 
-    public static void madeTransaction(Connection connection, String firstAccNumber, String secondAccNumber, int money){
+    public static void madeTransaction(Connection connection, String firstAccNumber, String secondAccNumber, int money) {
 
-        if(money >  checkBalance(connection, firstAccNumber)){
+        if (money > checkBalance(connection, firstAccNumber)) {
             System.out.println("There is not enough money on your bank account!");
         } else {
             CallableStatement cstmt = null;
@@ -72,7 +72,7 @@ public class CheckBalance {
         try {
             statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(showUserInfo);
-            while (rs.next()){
+            while (rs.next()) {
                 accountNumber = rs.getString("account_number");
             }
 
