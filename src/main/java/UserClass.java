@@ -22,7 +22,7 @@ public class UserClass {
         boolean correct = false;
         String userName = "";
         String password = "";
-        Integer balance = 0;
+        int balance = 0;
         while (!correct) {
             System.out.println("Enter your username: ");
             userName = scan.nextLine();
@@ -75,7 +75,7 @@ public class UserClass {
             err.printStackTrace();
         }
 
-        Integer userId = 0;
+        int userId = 0;
         String fetchUserIdQuery = "SELECT id FROM bank.users ORDER BY id desc limit 1; ";
         try (Statement statement = connection.createStatement()) {
             ResultSet rs = statement.executeQuery(fetchUserIdQuery);
