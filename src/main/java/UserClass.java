@@ -54,15 +54,14 @@ public class UserClass {
                     }
                 }
                 System.out.println("Top up your balance: ");
-                if (scan.hasNextInt()) {
+                balance = scan.nextInt();
+                while (balance <= 0) {
+                    System.out.println("That number is invalid!");
+
+                    System.out.println("Please enter the amount > 0 euro: ");
                     balance = scan.nextInt();
-                    if (balance <= 0) {
-                        System.out.println("That's not a valid amount, it must be > 0! Please enter a valid amount: ");
-                    } else {
-                        System.out.println(balance + " euro are credited to your balance");
-                        continue;
-                    }
                 }
+                System.out.println(balance + " euro are credited to your balance");
             }
         }
 
